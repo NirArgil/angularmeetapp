@@ -1,0 +1,83 @@
+{
+  "signupUsers": [
+    {
+      "fullName": "qwe",
+      "email": "qwe@qwe.qwe",
+      "password": "123123",
+      "mobile": "123",
+      "id": 1
+    },
+    {
+      "fullName": "qwe",
+      "email": "qwe@qwe.qwe",
+      "password": "1234",
+      "mobile": "123",
+      "id": 2
+    },
+    {
+      "fullName": "a",
+      "email": "asd",
+      "password": "123",
+      "mobile": "123",
+      "id": 3
+    },
+    {
+      "fullName": "qwe",
+      "email": "qwe@qwe.qwe",
+      "password": "123",
+      "mobile": "123",
+      "id": 4
+    },
+    {
+      "fullName": "",
+      "email": "qwe@qwe.qwe",
+      "password": "123",
+      "mobile": "123",
+      "id": 5
+    },
+    {
+      "fullName": "qwe",
+      "email": "",
+      "phoneNumber": "1234567890",
+      "password": "1234",
+      "confirmPassword": "1234",
+      "id": 6
+    },
+    {
+      "fullName": "qwe",
+      "email": "qwe@a",
+      "phoneNumber": "1231231231",
+      "password": "1234",
+      "confirmPassword": "1234",
+      "id": 7
+    },
+    {
+      "fullName": "qwe",
+      "email": "qwe@a",
+      "phoneNumber": "1234567890",
+      "password": "1234",
+      "confirmPassword": "1234",
+      "id": 8
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "id": 3,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
