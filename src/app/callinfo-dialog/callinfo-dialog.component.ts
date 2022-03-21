@@ -16,7 +16,7 @@ export class CallInfoDialogComponents {
     ) { }
 
     public showCopiedSnackBar() {        
-        this._snackBar.open('Peer ID Copied!', 'Hurrah', {
+        this._snackBar.open('Peer ID Copied!', 'Hide', {
         duration: 1000,
         horizontalPosition: 'center',
         verticalPosition: 'top'

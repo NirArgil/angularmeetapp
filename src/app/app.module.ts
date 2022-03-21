@@ -15,22 +15,18 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CallService } from './call.service';
 
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+
 import { MeetingsPageComponent } from './meetings/meetingsPage.component';
 import { DataService } from './data.service';
 import { HomePageComponent } from './homepage/homepage.component';
 import { AuthService } from './auth.service';
 
-// import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CallInfoDialogComponents,
 
-    SignupComponent,
-    MeetingsPageComponent,
     HomePageComponent
   ],
   imports: [

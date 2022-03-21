@@ -19,9 +19,9 @@
               placeholder="Password">
           </div>
 
-          <button type="submit" class="btn btn-primary">Login</button>
+          <button mat-stroked-button type="submit" color="primary">Login</button>
 
-          <a routerLink="/signup">new user? click to sign up</a>
+         <div><a routerLink="/signup">new user? click to sign up</a></div> 
         </form>
         {{formGroup.valid}}
         {{formGroup.value|json}}
