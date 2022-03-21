@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { DataService } from '../data.service';
 
 @Component({
@@ -10,40 +11,43 @@ import { DataService } from '../data.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   formGroup = new FormGroup({
     email: new FormControl(undefined, [Validators.required]),
-    password: new FormControl(undefined, Validators.compose([Validators.required, Validators.minLength(4)])),
+    password: new FormControl(
+      undefined,
+      Validators.compose([Validators.required, Validators.minLength(4)])
+    ),
   });
 
-  auth:boolean;
+  auth: boolean;
 
   constructor(
     private data: DataService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.data.currentAuth.subscribe(auth => this.auth = auth)
+    this.data.currentAuth.subscribe((auth) => (this.auth = auth));
   }
 
-  login() {
-    this.http.get<any>('http://localhost:3000/signupUsers').subscribe({
+  onSubmit() {
+    this.http.get<any>('http://localhost:3000/users').subscribe({
       next: (res) => {
-        let user = res.find((a: any) => {
+        let verifiedUser = res.find((a: any) => {
           return (
             a.email === this.formGroup.value.email &&
             a.password === this.formGroup.value.password
           );
         });
-        if (user) {
+        if (verifiedUser) {
           alert('Login success');
-          this.formGroup.reset();
-          this.router.navigate(['meetings']);
-          localStorage.setItem('LoggedIn', "true")
 
-          // this.authLogin();
+          this.authService.login(this.formGroup.value['email']);
+          this.formGroup.reset();
+          // localStorage.setItem('LoggedIn', 'true');
+
         } else {
           alert('User not found');
         }
@@ -57,5 +61,4 @@ export class LoginComponent implements OnInit {
   authLogin() {
     this.data.changeAuthStatus(true);
   }
- 
 }

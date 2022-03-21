@@ -2,16 +2,36 @@
   <section class="header">
     <div class="navbar">
       <img class="logo" src="/assets/img/logo.png" alt="logo">
-      <button mat-stroked-button class="signin" routerLink="/login">Sign in</button>
+      <!-- <button mat-stroked-button class="signin" routerLink="/meetings" *ngIf="loggedInVerify(); else SignIn">Make a call</button> -->
+      <button mat-stroked-button class="signin" routerLink="/meetings">Make a call</button>
+      <!-- <button mat-stroked-button routerLink="/login" class="signin">Sign in</button> -->
     </div>
     <h1 class="p1">Video Chat App</h1>
     <h1 class="p2">Its time to meet the new video chat platform.</h1>
 
-    <button mat-stroked-button>Get Start</button>
+    <button mat-stroked-button class="headerBtn">Get Start</button>
 
   </section>
 
   <section class="intro">
     <h1>About VCAPP</h1>
+    <p>
+      A lot of the business, work and social life moved online. <br />
+      So i built an app that deliever a good solution for this issue. <br />
+
+      New video chat application that provide a platform to meet by video for 2 participants. <br /> <br />
+      <b> How It Works? </b><br />
+      You just need to
+      enter your name, <br />
+      Press on "Copy Your ID", <br />
+      Send your ID to whom you want to connect, <br />
+      They need to put your ID in their "ID to Call" Box <br /> and <br />
+      Press the CALL button.
+
+  </p>
   </section>
 </div>
+
+<ng-template #SignIn>
+  <button mat-stroked-button routerLink="/login" class="signin">Sign in</button>
+</ng-template>

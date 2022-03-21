@@ -1,62 +1,91 @@
-import { Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
 import { CallService } from '../call.service';
-import { CallInfoDialogComponents, DialogData } from '../callinfo-dialog/callinfo-dialog.component';
+import {
+  CallInfoDialogComponents,
+  DialogData,
+} from '../callinfo-dialog/callinfo-dialog.component';
 import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-meetingsPage',
   templateUrl: './meetingsPage.component.html',
-  styleUrls: ['./meetingsPage.component.scss']
+  styleUrls: ['./meetingsPage.component.scss'],
 })
 export class MeetingsPageComponent implements OnInit, OnDestroy {
-
   public isCallStarted$: Observable<boolean>;
   private peerId: string | undefined;
 
   @ViewChild('localVideo') localVideo: ElementRef<HTMLVideoElement>;
   @ViewChild('remoteVideo') remoteVideo: ElementRef<HTMLVideoElement>;
- 
-  auth:boolean;
 
-  constructor(public dialog: MatDialog, private callService: CallService, private data: DataService) { 
-     
+  auth: boolean;
+
+  userName: string | null = null;
+  subscription: Subscription = new Subscription();
+
+  constructor(
+    public dialog: MatDialog,
+    private callService: CallService,
+    private data: DataService,
+    private authService: AuthService
+  ) {
     this.isCallStarted$ = this.callService.isCallStarted$;
     this.peerId = this.callService.initPeer();
-   }
+  }
 
   ngOnInit(): void {
-    this.data.currentAuth.subscribe(auth => this.auth = auth)
+    this.data.currentAuth.subscribe((auth) => (this.auth = auth));
+
+    this.subscription = this.authService
+      .getUser()
+      .subscribe((user) => (this.userName = user));
 
     this.callService.localStream$
-      .pipe(filter(res => !!res))
-      .subscribe(stream => this.localVideo.nativeElement.srcObject = stream)
+      .pipe(filter((res) => !!res))
+      .subscribe(
+        (stream) => (this.localVideo.nativeElement.srcObject = stream)
+      );
     this.callService.remoteStream$
-      .pipe(filter(res => !!res))
-      .subscribe(stream => this.remoteVideo.nativeElement.srcObject = stream)
-  
+      .pipe(filter((res) => !!res))
+      .subscribe(
+        (stream) => (this.remoteVideo.nativeElement.srcObject = stream)
+      );
   }
-  
+
   ngOnDestroy(): void {
     this.callService.destroyPeer();
+    this.subscription.unsubscribe();
   }
 
   public showModal(joinCall: boolean): void {
-    let dialogData: DialogData = joinCall ? ({ peerId: '', joinCall: true }) : ({ peerId: this.peerId, joinCall: false });
+    let dialogData: DialogData = joinCall
+      ? { peerId: '', joinCall: true }
+      : { peerId: this.peerId, joinCall: false };
     const dialogRef = this.dialog.open(CallInfoDialogComponents, {
       width: '250px',
-      data: dialogData
+      data: dialogData,
     });
 
-    dialogRef.afterClosed()
+    dialogRef
+      .afterClosed()
       .pipe(
-        switchMap(peerId => 
-          joinCall ? of(this.callService.establishMediaCall(peerId)) : of(this.callService.enableCallAnswer())
-        ),
+        switchMap((peerId) =>
+          joinCall
+            ? of(this.callService.establishMediaCall(peerId))
+            : of(this.callService.enableCallAnswer())
+        )
       )
-      .subscribe(_  => { });
+      .subscribe((_) => {});
   }
 
   public endCall() {
@@ -64,13 +93,13 @@ export class MeetingsPageComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    // this.data.changeAuthStatus(false);
+    // this.data.changeAuthStatus(!this.auth);
     localStorage.removeItem('LoggedIn');
   }
 
   loggedInVerify() {
     if (localStorage.getItem('LoggedIn')) {
-   return true;
-}
- }
+      return true;
+    }
+  }
 }

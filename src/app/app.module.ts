@@ -20,12 +20,15 @@ import { SignupComponent } from './signup/signup.component';
 import { MeetingsPageComponent } from './meetings/meetingsPage.component';
 import { DataService } from './data.service';
 import { HomePageComponent } from './homepage/homepage.component';
+import { AuthService } from './auth.service';
+
+// import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CallInfoDialogComponents,
-    LoginComponent,
+
     SignupComponent,
     MeetingsPageComponent,
     HomePageComponent
@@ -33,6 +36,7 @@ import { HomePageComponent } from './homepage/homepage.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+
     FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -47,7 +51,8 @@ import { HomePageComponent } from './homepage/homepage.component';
   ],
   providers: [
     CallService,
-    DataService
+    DataService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
