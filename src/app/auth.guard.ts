@@ -15,9 +15,15 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> {
-    return this.authService.getUser().pipe(
-      map(user => !!user)
-    );
+    // return this.authService.getUser().pipe(
+    //   map(user => !!user)
+    // ); 
+    
+    return this.authService.getUserLoggedIn(); 
+      // getUserLoggedIn() {
+      // if(localStorage.getItem('LoggedIn')) {
+      //   return true;
+      // }
   }
-
+  }
 }

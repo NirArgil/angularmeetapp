@@ -1,10 +1,13 @@
 <div class="wrapper">
   <section class="header">
     <div class="navbar">
-      <img class="logo" src="/assets/img/logo.png" alt="logo">
+
       <!-- <button mat-stroked-button class="signin" routerLink="/meetings" *ngIf="loggedInVerify(); else SignIn">Make a call</button> -->
-      <button mat-stroked-button class="signin" routerLink="/meetings">Make a call</button>
-      <!-- <button mat-stroked-button routerLink="/login" class="signin">Sign in</button> -->
+
+      <button mat-stroked-button class="meetings" routerLink="/meetings">Make a call</button>
+      <img class="logo" src="/assets/img/logo.png" alt="logo">
+      <h3 class="username">Hi, {{username}}</h3>
+      <button mat-stroked-button (click)="logout()" class="signin" *ngIf="loggedinUser() else SignIn">Log Out</button>
     </div>
     <h1 class="p1">Video Chat App</h1>
     <h1 class="p2">Its time to meet the new video chat platform.</h1>
@@ -28,7 +31,7 @@
       They need to put your ID in their "ID to Call" Box <br /> and <br />
       Press the CALL button.
 
-  </p>
+    </p>
   </section>
 </div>
 

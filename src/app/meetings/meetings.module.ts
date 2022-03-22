@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MeetingsPageComponent } from './meetingsPage.component';
 import { MeetingsPageRoutingModule } from './meetings-routing.module';
 
-
 @NgModule({
   declarations: [
     MeetingsPageComponent

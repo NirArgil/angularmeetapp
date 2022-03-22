@@ -43,11 +43,10 @@ export class LoginComponent implements OnInit {
         });
         if (verifiedUser) {
           alert('Login success');
-
+          localStorage.setItem('LoggedIn', this.formGroup.value['email']);
           this.authService.login(this.formGroup.value['email']);
+          
           this.formGroup.reset();
-          // localStorage.setItem('LoggedIn', 'true');
-
         } else {
           alert('User not found');
         }
@@ -58,7 +57,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  authLogin() {
-    this.data.changeAuthStatus(true);
-  }
+  // authLogin() {
+  //   this.data.changeAuthStatus(true);
+  // }
 }

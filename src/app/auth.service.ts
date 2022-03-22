@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -21,6 +21,30 @@ export class AuthService {
     this.setUser(user);
     this.router.navigateByUrl('/meetings');
   }
+
+  logout() {
+    this.user$.next(null);
+    localStorage.removeItem('LoggedIn');
+  }
+
+  getUserLoggedIn() {
+    if(localStorage.getItem('LoggedIn')) {
+      return true;
+    }
+}
+
+  // checkIfLogin(){
+  //   this.user$.subscribe(
+  //     user => {
+
+  //       if(localStorage.getItem('LoggedIn')) {
+  //         return true;
+  //       } else { 
+  //         return false
+  //       }
+  //     }
+  //   )
+  // }
 
   constructor(private router: Router) { }
 }

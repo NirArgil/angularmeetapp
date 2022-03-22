@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -6,13 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  constructor() {}
+  username: string | null = null;
 
-  ngOnInit(): void {}
+  constructor(private authService: AuthService) {}
 
-  loggedInVerify() {
+  ngOnInit(): void {
+    this.username = localStorage.getItem('LoggedIn')
+  }
+
+  loggedinUser() {
     if (localStorage.getItem('LoggedIn')) {
       return true;
     }
   }
+
+  logout() {
+    this.authService.logout();
+  }
+
 }

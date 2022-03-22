@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
@@ -37,7 +38,8 @@ export class MeetingsPageComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private callService: CallService,
     private data: DataService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {
     this.isCallStarted$ = this.callService.isCallStarted$;
     this.peerId = this.callService.initPeer();
@@ -93,13 +95,14 @@ export class MeetingsPageComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    // this.data.changeAuthStatus(!this.auth);
-    localStorage.removeItem('LoggedIn');
+    this.authService.logout();
+    this.router.navigateByUrl('/home');
   }
 
-  loggedInVerify() {
+  loggedinUser() {
     if (localStorage.getItem('LoggedIn')) {
       return true;
     }
   }
+
 }

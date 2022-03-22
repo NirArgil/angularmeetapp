@@ -1,27 +1,36 @@
-<div class="container">
+<div class="container" *ngIf="loggedinUser() else signin">
 
-  <button mat-stroked-button (click)="logout()" class="signin">Logout</button>
-  <button mat-stroked-button routerLink="/home" class="signin">Home</button>
-{{userName}}
-  <div id="app">
-    <div class="container-fluid">
-      <div class="row p-2">
-        <button mat-raised-button color="primary" class="m-2" [disabled]="isCallStarted$ | async"
-          (click)="showModal(false)">Start Call</button>
-        <button mat-raised-button class="m-2" [disabled]="isCallStarted$ | async" (click)="showModal(true)">Join
-          Call</button>
-        <button mat-raised-button color="warn" class="m-2" [disabled]="!(isCallStarted$ | async)"
-          (click)="endCall()">End Call</button>
-      </div>
-      <div class="row">
-        <div class="col text-center">
-          <div id="video-wrapper">
-            <video #remoteVideo id="remote-video" poster="./assets/video-placeholder.jpg" autoplay playsinline></video>
-            <video #localVideo id="local-video" autoplay playsinline [muted]=true></video>
-          </div>
+  <div class="navbar">
+    <button mat-stroked-button routerLink="/home" class="home">Home</button>
+    <img class="logo" src="/assets/img/logo.png" alt="logo">
+    <button mat-stroked-button (click)="logout()" class="logout">Logout</button>
+  </div>
+  
+  {{userName}}
+
+  <div class="container-fluid">
+    <div class="row p-2">
+      <button mat-raised-button color="primary" class="m-2" [disabled]="isCallStarted$ | async"
+        (click)="showModal(false)">Start Call</button>
+      <button mat-raised-button class="m-2" [disabled]="isCallStarted$ | async" (click)="showModal(true)">Join
+        Call</button>
+      <button mat-raised-button color="warn" class="m-2" [disabled]="!(isCallStarted$ | async)" (click)="endCall()">End
+        Call</button>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <div id="video-wrapper">
+         
+          <video #remoteVideo id="remote-video" poster="./assets/video-placeholder.jpg" autoplay playsinline></video>
+          <video #localVideo id="local-video" autoplay playsinline [muted]=true></video>
         </div>
       </div>
     </div>
+
   </div>
 
 </div>
+
+<ng-template #signin>
+  <div>Loading...</div>
+</ng-template>
