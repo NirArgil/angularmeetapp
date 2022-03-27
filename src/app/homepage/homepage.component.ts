@@ -12,7 +12,8 @@ export class HomePageComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.username = localStorage.getItem('LoggedIn')
+    this.username = localStorage.getItem('LoggedIn') as string;
+    this.authService.setUser(this.username);
   }
 
   loggedinUser() {
@@ -24,5 +25,4 @@ export class HomePageComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-
 }

@@ -4,9 +4,9 @@
 
       <!-- <button mat-stroked-button class="signin" routerLink="/meetings" *ngIf="loggedInVerify(); else SignIn">Make a call</button> -->
 
-      <button mat-stroked-button class="meetings" routerLink="/meetings">Make a call</button>
+      <button mat-stroked-button class="meetings" routerLink="/meetings" *ngIf="loggedinUser()">Make a call</button>
       <img class="logo" src="/assets/img/logo.png" alt="logo">
-      <h3 class="username">Hi, {{username}}</h3>
+      <h3 class="username" *ngIf="loggedinUser()">Hi, {{username}}</h3>
       <button mat-stroked-button (click)="logout()" class="signin" *ngIf="loggedinUser() else SignIn">Log Out</button>
     </div>
     <h1 class="p1">Video Chat App</h1>

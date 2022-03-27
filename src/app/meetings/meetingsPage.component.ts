@@ -39,7 +39,7 @@ export class MeetingsPageComponent implements OnInit, OnDestroy {
     private callService: CallService,
     private data: DataService,
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {
     this.isCallStarted$ = this.callService.isCallStarted$;
     this.peerId = this.callService.initPeer();
@@ -104,5 +104,4 @@ export class MeetingsPageComponent implements OnInit, OnDestroy {
       return true;
     }
   }
-
 }

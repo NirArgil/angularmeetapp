@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,14 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {
+  username$: string | null = null;
+
+  constructor(public dialog: MatDialog, private authService: AuthService) {
   }
   
   ngOnInit(): void {
+    
+    this.username$ = localStorage.getItem('LoggedIn');
+    this.authService.setUser(this.username$)
   }
 }

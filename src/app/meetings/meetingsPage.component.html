@@ -1,4 +1,4 @@
-<div class="container" *ngIf="loggedinUser() else signin">
+<div class="container">
 
   <div class="navbar">
     <button mat-stroked-button routerLink="/home" class="home">Home</button>
@@ -21,7 +21,7 @@
       <div class="col text-center">
         <div id="video-wrapper">
          
-          <video #remoteVideo id="remote-video" poster="./assets/video-placeholder.jpg" autoplay playsinline></video>
+          <video #remoteVideo id="remote-video" autoplay playsinline></video>
           <video #localVideo id="local-video" autoplay playsinline [muted]=true></video>
         </div>
       </div>
@@ -30,7 +30,3 @@
   </div>
 
 </div>
-
-<ng-template #signin>
-  <div>Loading...</div>
-</ng-template>

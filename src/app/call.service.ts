@@ -57,12 +57,14 @@ export class CallService {
       });
 
       const connection = this.peer.connect(remotePeerId);
+
       connection.on('error', (err) => {
         console.error(err);
         this.snackBar.open(err, 'Close');
       });
 
       this.mediaCall = this.peer.call(remotePeerId, stream);
+      
       if (!this.mediaCall) {
         let errorMessage = 'Unable to connect to remote peer';
         this.snackBar.open(errorMessage, 'Close');
