@@ -7,7 +7,7 @@ import { HomePageComponent } from './homepage/homepage.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'meetings', pathMatch: 'full' },
   {
     path: 'signup',
     loadChildren: () =>
