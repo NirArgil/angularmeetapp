@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'meetings',
     loadChildren: () =>
       import('./meetings/meetings.module').then((m) => m.MeetingsPageModule),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   { path: 'home', component: HomePageComponent },
 ];
